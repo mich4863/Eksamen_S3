@@ -1,0 +1,223 @@
+﻿<UserControl x:Class="FluentApi.Gui.ProjectUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FluentApi.Gui"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0"
+                  Header=" Oversigt Projekter"
+                  Margin="10">
+            <Grid>
+                <DataGrid AutoGenerateColumns="False"
+                          Margin="10"
+                          x:Name="dataGridProjects"
+                          ColumnWidth="*"
+                          SelectionChanged="DataGrid_Projects_SelectionChanged"
+                          KeyDown="DataGrid_Projects_KeyDown">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Navn"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Teams"
+                                            Binding="{Binding MembersOfProject}" />
+                        <DataGridTextColumn Header="Beskrivelse"
+                                            Binding="{Binding Description}" />
+                        <DataGridTextColumn Header="Startdato"
+                                            Binding="{Binding StartDate, StringFormat=d}" />
+                        <DataGridTextColumn Header="Slutdato"
+                                            Binding="{Binding EndDate, StringFormat=d}" />
+                        <DataGridTextColumn Header="Budget"
+                                            Binding="{Binding BudgetLimet, StringFormat=c}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="1"
+                  Header=" Detaljer "
+                  Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid x:Name="gridProject">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Navn:"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1"
+                             Grid.Row="0"
+                             Margin="10"
+                             x:Name="textBoxProjectName" />
+                    <Label Content="Slutdato:"
+                           Grid.Column="0"
+                           Grid.Row="2"
+                           Padding="0.1"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center" />
+                    <DatePicker Grid.Column="1"
+                                Grid.Row="2"
+                                Margin="10"
+                                x:Name="datePickerProjectEndDate" />
+                    <Label Content="Beskrivelse:"
+                           Grid.Column="3"
+                           Grid.Row="0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center" />
+                    <TextBox Grid.Column="4"
+                             Grid.Row="0"
+                             Margin="10"
+                             x:Name="textBoxProjectDescription" />
+                    <Label Content="Start dato:"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center" />
+                    <DatePicker Grid.Column="1"
+                                Grid.Row="1"
+                                Margin="10"
+                                x:Name="datePickerProjectStartDate" />
+                    <TextBox Grid.Column="4"
+                             Grid.Row="1"
+                             Margin="10"
+                             x:Name="textBoxBudgetLimit" />
+                    <Label Content="Budget:"
+                           Grid.Column="3"
+                           Grid.Row="1"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center" />
+                    <Button Content="Opdater"
+                            Grid.Column="5"
+                            Grid.Row="3"
+                            HorizontalAlignment="Right"
+                            Margin="10"
+                            Padding="4"
+                            VerticalAlignment="Bottom"
+                            Width="100"
+                            BorderBrush="Transparent"
+                            x:Name="buttonUpdateProject"
+                            Click="Button_UpdateProject_Click" />
+                    <Button Content="Gem Ny"
+                            Grid.Column="4"
+                            Grid.Row="3"
+                            HorizontalAlignment="Right"
+                            Margin="10"
+                            Padding="4"
+                            VerticalAlignment="Bottom"
+                            Width="100"
+                            BorderBrush="Transparent"
+                            x:Name="buttonSaveNewProject"
+                            Click="Button_SaveNewProject_Click" />
+                </Grid>
+
+                <Line Grid.Row="1"
+                      Stroke="LightGray"
+                      StrokeThickness="5"
+                      X1="0"
+                      Y1="10"
+                      X2="1000"
+                      Y2="10" />
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Team medlemmer af projekt"
+                              Margin="10"
+                              Grid.Column="2"
+                              Grid.Row="0">
+                        <DataGrid AutoGenerateColumns="False"
+                                  Margin="10"
+                                  x:Name="dataGridAddOrDeleteFromProject"
+                                  ColumnWidth="*">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Navn"
+                                                    Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Beskrivelse"
+                                                    Binding="{Binding Description}" />
+                                <DataGridTextColumn Header="Start dato"
+                                                    Binding="{Binding StartDate}" />
+                                <DataGridTextColumn Header="Forventet slutdato"
+                                                    Binding="{Binding ExpectedEndDate}" />
+                                <DataGridTextColumn Header="Udgifter"
+                                                    Binding="{Binding TeamExpenses, StringFormat=c}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </GroupBox>
+                    <ComboBox Grid.Column="0"
+                              Grid.Row="0"
+                              Height="30"
+                              Width="250"
+                              Margin="0,0,0,160"
+                              DisplayMemberPath="Name"               
+                              IsEditable="True"
+                              IsReadOnly="True"
+                              Text="Vælg et team"
+                              x:Name="comboBoxAllTeams">
+                    </ComboBox>
+                    <Label Content="Total Løn udgifter:"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right" />
+                    <Label Content=""
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           x:Name="labelTotalExpenses" />
+                    <Button Content="Fjern"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            Margin="10"
+                            Padding="4"
+                            VerticalAlignment="Bottom"
+                            Width="100"
+                            BorderBrush="Transparent"
+                            x:Name="buttonDeleteTeamFromPrject"
+                            Click="Button_DeleteTeamFromProject_Click" />
+                    <Button Content="Tilfløj"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,132,9.6"
+                            Padding="4"
+                            VerticalAlignment="Bottom"
+                            Width="100"
+                            BorderBrush="Transparent"
+                            x:Name="buttonAddTeamToProject"
+                            Click="Button_AddTeamToProject_Click" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>
