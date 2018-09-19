@@ -34,7 +34,7 @@ namespace FluentApi.Gui
             dataGridProjects.ItemsSource = model.Projects.ToList();
 
             this.DataContext = selectedProject;
-            ReloadAllTeams();
+           
 
         }
 
